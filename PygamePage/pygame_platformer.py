@@ -1,38 +1,34 @@
 import sys
-import pygame
-from pygame.locals import *
 from InstanceModel.spr_platform import *
 from InstanceModel.spr_player import *
+import GlobalVariable.game_setting as gb_setting
+import GlobalVariable.sprite_group as gb_spr
 
 pygame.init()
-vec = pygame.math.Vector2
-
-HEIGHT = 450
-WIDTH = 400
-ACC = 0.5
-FRIC = -0.12
-FPS = 60
 
 FramePerSec = pygame.time.Clock()
 
-display_surface = pygame.display.set_mode((WIDTH, HEIGHT))
+display_surface = pygame.display.set_mode((gb_setting.WIDTH, gb_setting.HEIGHT))
 pygame.display.set_caption("Emotional Platformer")
 
 P1 = Player()
-platform_1 = Platform(WIDTH, HEIGHT)
+platform_1 = Platform(gb_setting.WIDTH, gb_setting.HEIGHT)
 
-all_sprites = pygame.sprite.Group()
-all_sprites.add(P1)
-all_sprites.add(platform_1)
+gb_spr.all_sprites.add(P1)
+gb_spr.all_sprites.add(platform_1)
+
+gb_spr.env_sprites.add(platform_1)
 
 while True:
+    P1.move()
+    P1.update()
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
     display_surface.fill((0, 0, 0))
 
-    for entity in all_sprites:
+    for entity in gb_spr.all_sprites:
         display_surface.blit(entity.surf, entity.rect)
     pygame.display.update()
-    FramePerSec.tick(FPS)
+    FramePerSec.tick(gb_setting.FPS)

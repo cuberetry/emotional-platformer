@@ -1,5 +1,7 @@
 import pygame
 
+vec = pygame.math.Vector2
+
 
 class Platform(pygame.sprite.Sprite):
     def __init__(self, width, height):
