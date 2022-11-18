@@ -11,6 +11,8 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, acc_rate=gb_var.ACCELERATION):
         super().__init__()
         self.state = 'n'
+        gb_spr.all_sprites.add(self)
+        gb_spr.player_sprites.add(self)
 
         # Rendering setup
         self.surf = pygame.Surface((30, 30))

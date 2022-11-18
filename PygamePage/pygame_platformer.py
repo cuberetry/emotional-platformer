@@ -14,11 +14,6 @@ pygame.display.set_caption("Emotional Platformer")
 P1 = Player()
 platform_1 = Platform(gb_setting.WIDTH, gb_setting.HEIGHT)
 
-gb_spr.all_sprites.add(P1)
-gb_spr.all_sprites.add(platform_1)
-
-gb_spr.env_sprites.add(platform_1)
-
 while True:
     P1.move()
     P1.update()
