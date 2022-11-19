@@ -43,8 +43,3 @@ class EmotionDetector:
         if cv2.waitKey(1) & 0xFF == ord('q'):
             self.cap.release()
             cv2.destroyAllWindows()
-
-
-test_obj = EmotionDetector()
-while True:
-    test_obj.main_loop()
