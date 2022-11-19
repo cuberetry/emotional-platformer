@@ -14,7 +14,7 @@ class EmotionDetector:
         self.classifier = load_model(os.path.join(self.absolute_path, "EmotionDetectionModel.h5"))
 
         self.class_labels = ['Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
-        self.labels = []
+        self.label = None
         self.cap = cv2.VideoCapture(0)
 
     def main_loop(self):
@@ -33,14 +33,11 @@ class EmotionDetector:
                 roi = np.expand_dims(roi, axis=0)
 
                 prediction = self.classifier.predict(roi)[0]
-                label = self.class_labels[prediction.argmax()]
+                self.label = self.class_labels[prediction.argmax()]
                 label_position = (x, y)
-                cv2.putText(frame, label, label_position, cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
-            else:
-                cv2.putText(frame, 'No Face Found', (20, 20), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
+                cv2.putText(frame, self.label, label_position, cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
             break
 
-        cv2.imshow('Emotion Detector', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             self.cap.release()
             cv2.destroyAllWindows()
