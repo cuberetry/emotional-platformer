@@ -10,7 +10,7 @@ vec = pygame.math.Vector2
 class Player(pygame.sprite.Sprite):
     def __init__(self, acc_rate=gb_var.ACCELERATION):
         super().__init__()
-        self.state = 'n'
+        self.emotion_state = gb_var.EMOTION
         gb_spr.all_sprites.add(self)
         gb_spr.player_sprites.add(self)
 
@@ -56,18 +56,9 @@ class Player(pygame.sprite.Sprite):
 
     # Update instance status
     def update(self):
-        # Mock-up state change
-        pressed_keys = pygame.key.get_pressed()
-        if pressed_keys[K_y]:
-            self.surf.fill(gb_var.STATE_COLOR['n'])
-        elif pressed_keys[K_u]:
-            self.surf.fill(gb_var.STATE_COLOR['h'])
-        elif pressed_keys[K_i]:
-            self.surf.fill(gb_var.STATE_COLOR['a'])
-        elif pressed_keys[K_o]:
-            self.surf.fill(gb_var.STATE_COLOR['s'])
-        elif pressed_keys[K_p]:
-            self.surf.fill(gb_var.STATE_COLOR['w'])
+        # Player emotion state update
+        self.emotion_state = gb_var.EMOTION
+        self.surf.fill(gb_var.STATE_COLOR[self.emotion_state])
 
         # Collision detection
         hit_platform = pygame.sprite.spritecollide(self, gb_spr.env_sprites, False)

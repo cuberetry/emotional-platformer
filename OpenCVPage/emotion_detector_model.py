@@ -13,8 +13,8 @@ class EmotionDetector:
                                                      (self.absolute_path, "haarcascade_frontalface_default.xml"))
         self.classifier = load_model(os.path.join(self.absolute_path, "EmotionDetectionModel.h5"))
 
-        self.class_labels = ['Angry', 'Happy', 'Neutral', 'Sad', 'Surprise']
-        self.label = None
+        self.class_labels = ['a', 'h', 'n', 's', 'w']
+        self.label = 'n'
         self.cap = cv2.VideoCapture(0)
 
     def main_loop(self):
@@ -22,6 +22,7 @@ class EmotionDetector:
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = self.face_classifier.detectMultiScale(gray, 1.3, 5)
 
+        self.label = 'n'
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
             roi_gray = gray[y:y + h, x:x + w]
@@ -32,12 +33,10 @@ class EmotionDetector:
                 roi = img_to_array(roi)
                 roi = np.expand_dims(roi, axis=0)
 
-                prediction = self.classifier.predict(roi)[0]
+                prediction = self.classifier.predict(roi, verbose=0)[0]
                 self.label = self.class_labels[prediction.argmax()]
-                label_position = (x, y)
-                cv2.putText(frame, self.label, label_position, cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
             break
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            self.cap.release()
-            cv2.destroyAllWindows()
+    def destroy(self):
+        self.cap.release()
+        cv2.destroyAllWindows()
