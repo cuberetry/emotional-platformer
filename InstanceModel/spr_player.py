@@ -18,6 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.surf = pygame.Surface((30, 30))
         self.surf.fill(gb_var.STATE_COLOR['n'])
         self.rect = self.surf.get_rect(center=(10, 420))
+        self.left_border, self.right_border = -50, 450
 
         # Physic setup
         self.acc_rate = acc_rate
