@@ -1,6 +1,6 @@
 import sys
 from InstanceModel.spr_platform import *
-from InstanceModel.spr_scrollCam import *
+from InstanceModel.spr_camera import *
 from InstanceModel.spr_player import *
 import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.sprite_group as gb_spr
