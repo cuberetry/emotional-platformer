@@ -1,4 +1,4 @@
-import OpenCVPage.driver_code as cv
+import OpenCVPage.emotion_detector_model as cv
 
 if __name__ == '__main__':
     main_emotion_detector = cv.EmotionDetector()
