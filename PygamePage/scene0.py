@@ -5,27 +5,23 @@ import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.sprite_group as gb_spr
 
 
-class MainPygameWindow:
+class Scene:
     def __init__(self):
-        pygame.init()
-        self.FramePerSec = pygame.time.Clock()
-
-        self.display_surface = pygame.display.set_mode((gb_setting.WIDTH, gb_setting.HEIGHT))
-        pygame.display.set_caption("Emotional Platformer")
-
         self.P1 = Player()
         self.platform_1 = Platform(gb_setting.WIDTH, gb_setting.HEIGHT)
+        print("Created Scene0")
 
-    def main_loop(self):
+    def mainloop(self):
+        print("Im here")
         self.P1.move()
         self.P1.update()
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-        self.display_surface.fill((0, 0, 0))
+        gb_var.SURFACE.fill((0, 0, 0))
 
         for entity in gb_spr.all_sprites:
-            self.display_surface.blit(entity.surf, entity.rect)
+            gb_var.SURFACE.blit(entity.surf, entity.rect)
         pygame.display.update()
-        self.FramePerSec.tick(gb_setting.FPS)
+        gb_var.FPS.tick(gb_setting.MAXFPS)
