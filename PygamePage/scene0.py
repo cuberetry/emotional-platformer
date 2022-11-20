@@ -15,7 +15,10 @@ class MainPygameWindow:
         pygame.display.set_caption("Emotional Platformer")
 
         self.P1 = Player()
-        self.platform_1 = Platform(gb_setting.WIDTH, gb_setting.HEIGHT)
+
+        # load stage
+        self.map = TileMap(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
+        self.P1.rect.x, self.P1.rect.y = self.map.start_x, self.map.start_y
 
         self.camera = Camera(self.P1)
         self.follow = Follow(self.camera, self.P1)
