@@ -10,4 +10,4 @@ if __name__ == '__main__':
         main_emotion_detector.main_loop()
         gb_var.EMOTION = main_emotion_detector.label
         main_pygame_window.main_loop()
-        print("Hello World!")
+        
