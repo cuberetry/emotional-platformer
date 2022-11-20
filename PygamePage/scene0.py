@@ -14,7 +14,10 @@ class MainPygameWindow:
         pygame.display.set_caption("Emotional Platformer")
 
         self.P1 = Player()
-        self.platform_1 = Platform(gb_setting.WIDTH, gb_setting.HEIGHT)
+
+        # load stage
+        self.map = TileMap('stage_test.csv')
+        self.P1.rect.x, self.P1.rect.y = self.map.start_x, self.map.start_y
 
     def main_loop(self):
         self.P1.move()
