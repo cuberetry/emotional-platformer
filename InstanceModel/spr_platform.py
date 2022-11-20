@@ -11,6 +11,6 @@ class Platform(pygame.sprite.Sprite):
         gb_spr.env_sprites.add(self)
 
         # Rendering setup
-        self.surf = pygame.Surface((width, 20))
+        self.surf = pygame.Surface((width, height))
         self.surf.fill((255, 0, 0))
         self.rect = self.surf.get_rect(center=(width/2, height-10))
