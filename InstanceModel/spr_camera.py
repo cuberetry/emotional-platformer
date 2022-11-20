@@ -13,9 +13,8 @@ class Camera:
     def __init__(self, player):
         self.player = player
         self.DISPLAY_W, self.DISPLAY_H = gb_setting.WIDTH, gb_setting.HEIGHT
-        self.offset = vec(0, 0) # use to frame camera in correct position
-        self.offset_float = vec(0, 0) # another variable store precise position of the offset
-        # self.CONST = vec(0, 0)
+        self.offset = vec(0, 0)
+        self.offset_float = vec(0, 0)
         self.CONST = vec(-self.DISPLAY_W/3 + player.rect.w/3, -100)
 
     def setmethod(self, method):

@@ -34,7 +34,6 @@ class MainPygameWindow:
 
         self.camera.scroll()
         for entity in gb_spr.all_sprites:
-            # self.display_surface.blit(entity.surf, entity.rect)
             self.display_surface.blit(entity.surf, (entity.rect.x - self.camera.offset.x,
                                                     entity.rect.y - self.camera.offset.y))
         self.display_surface.blit(self.P1.surf, (self.P1.rect.x - self.camera.offset.x, self.P1.rect.y -
