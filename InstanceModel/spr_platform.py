@@ -1,4 +1,6 @@
-import pygame, csv, os
+import pygame
+import csv
+import os
 import GlobalVariable.sprite_group as gb_spr
 import GlobalVariable.game_var as gb_var
 
