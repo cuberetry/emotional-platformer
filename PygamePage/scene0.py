@@ -28,6 +28,8 @@ class Scene:
                 pygame.quit()
                 sys.exit()
         gb_var.SURFACE.fill((0, 0, 0))
+        if gb_var.IS_PAUSING:
+            return
 
         self.camera.scroll()
         for entity in gb_spr.all_sprites:
