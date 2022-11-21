@@ -10,7 +10,7 @@ class Scene:
     def __init__(self):
         self.P1 = Player()
 
-        # load stage
+        # Load stage
         self.map = TileMap(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
         self.P1.rect.x, self.P1.rect.y = self.map.start_x, self.map.start_y
 
@@ -35,7 +35,8 @@ class Scene:
         for entity in gb_spr.all_sprites:
             if entity in gb_spr.camera_sprites:
                 continue
-            gb_var.SURFACE.blit(entity.surf, (entity.rect.x - self.camera.offset.x, entity.rect.y - self.camera.offset.y))
+            gb_var.SURFACE.blit(entity.surf, (entity.rect.x - self.camera.offset.x,
+                                              entity.rect.y - self.camera.offset.y))
 
         pygame.display.update()
         gb_var.FPS.tick(gb_setting.MAXFPS)
