@@ -78,3 +78,9 @@ class Player(pygame.sprite.Sprite):
         if hit_platform:
             self.pos.y = hit_platform[0].rect.top + 1
             self.vel.y = 0
+
+
+
+
+
+

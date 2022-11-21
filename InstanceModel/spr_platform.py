@@ -3,19 +3,20 @@ import csv
 import os
 import GlobalVariable.sprite_group as gb_spr
 import GlobalVariable.game_var as gb_var
+import InstanceModel.spr_fire_platform as fire_p
 
 vec = pygame.math.Vector2
 
 
 class Platform(pygame.sprite.Sprite):
-    def __init__(self, state, x, y):
+    def __init__(self, x, y):
         super().__init__()
         gb_spr.all_sprites.add(self)
         gb_spr.env_sprites.add(self)
 
         # Rendering setup
         self.surf = pygame.Surface((16, 16))
-        self.surf.fill(state)
+        self.surf.fill(gb_var.PLATFORM_STATE_COLOR['pp'])
         self.rect = self.surf.get_rect()
         self.rect.x, self.rect.y = x, y
 
@@ -55,16 +56,17 @@ class TileMap:
                 if tile == '0':
                     self.start_x, self.start_y = x * self.tile_size, y * self.tile_size
                 elif tile == '1':
-                    tiles.append(Platform(gb_var.PLATFORM_STATE_COLOR['np'], x * self.tile_size, y * self.tile_size))
+                    tiles.append(fire_p.FirePlatform(x * self.tile_size, y * self.tile_size)) # gb_var.PLATFORM_STATE_COLOR['pp']
                 elif tile == '2':
-                    tiles.append(Platform(gb_var.PLATFORM_STATE_COLOR['hp'], x * self.tile_size, y * self.tile_size))
+                    tiles.append(Platform(x * self.tile_size, y * self.tile_size)) # gb_var.PLATFORM_STATE_COLOR['np']
                 elif tile == '3':
-                    tiles.append(Platform(gb_var.PLATFORM_STATE_COLOR['ap'], x * self.tile_size, y * self.tile_size))
+                    tiles.append(Platform(x * self.tile_size, y * self.tile_size)) # gb_var.PLATFORM_STATE_COLOR['hp']
                 elif tile == '4':
-                    tiles.append(Platform(gb_var.PLATFORM_STATE_COLOR['sp'], x * self.tile_size, y * self.tile_size))
+                    tiles.append(Platform(x * self.tile_size, y * self.tile_size)) # gb_var.PLATFORM_STATE_COLOR['ap']
                 elif tile == '5':
-                    tiles.append(Platform(gb_var.PLATFORM_STATE_COLOR['wp'], x * self.tile_size, y * self.tile_size))
-
+                    tiles.append(Platform(x * self.tile_size, y * self.tile_size)) # gb_var.PLATFORM_STATE_COLOR['sp']
+                elif tile == '6':
+                    tiles.append(Platform(x * self.tile_size, y * self.tile_size)) # gb_var.PLATFORM_STATE_COLOR['wp']
                 x += 1
 
             # Move to next row
