@@ -9,8 +9,12 @@ from abc import ABC, abstractmethod
 vec = pygame.math.Vector2
 
 
-class Camera:
+class Camera(pygame.sprite.Sprite):
     def __init__(self, player):
+        super().__init__()
+        gb_spr.all_sprites.add(self)
+
+        # Rendering setup
         self.player = player
         self.DISPLAY_W, self.DISPLAY_H = gb_setting.WIDTH, gb_setting.HEIGHT
         self.offset = vec(0, 0)
