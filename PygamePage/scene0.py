@@ -15,6 +15,7 @@ class MainPygameWindow:
         pygame.display.set_caption("Emotional Platformer")
 
         self.P1 = Player()
+        self.env = gb_spr.env_sprites
 
         # load stage
         self.map = TileMap(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
@@ -37,8 +38,10 @@ class MainPygameWindow:
 
         self.camera.scroll()
         for entity in gb_spr.all_sprites:
-            self.display_surface.blit(entity.surf, (entity.rect.x - self.camera.offset.x,
-                                                    entity.rect.y - self.camera.offset.y))
+            self.display_surface.blit(entity.surf, entity.rect)
+
+        self.display_surface.blit(self.env.surf, (self.env.surf.rect.x - self.camera.offset.x, self.env.surf.rect.y -
+                                                  self.camera.offset.y))
         self.display_surface.blit(self.P1.surf, (self.P1.rect.x - self.camera.offset.x, self.P1.rect.y -
                                                  self.camera.offset.y))
 
