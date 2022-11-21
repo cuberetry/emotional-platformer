@@ -30,9 +30,10 @@ class Scene:
         gb_var.SURFACE.fill((0, 0, 0))
 
         self.camera.scroll()
-        for entity in gb_spr.all_sprites:
-            gb_var.SURFACE.blit(entity.surf, (entity.rect.x - self.camera.offset.x,
-                                              entity.rect.y - self.camera.offset.y))
+        for env in gb_spr.env_sprites:
+            gb_var.SURFACE.blit(env.surf, (env.rect.x - self.camera.offset.x, env.rect.y - self.camera.offset.y))
+        for player in gb_spr.player_sprites:
+            gb_var.SURFACE.blit(player.surf, (player.rect.x - self.camera.offset.x, player.rect.y - self.camera.offset.y))
 
         pygame.display.update()
         gb_var.FPS.tick(gb_setting.MAXFPS)

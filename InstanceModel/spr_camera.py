@@ -15,7 +15,7 @@ class Camera:
         self.DISPLAY_W, self.DISPLAY_H = gb_setting.WIDTH, gb_setting.HEIGHT
         self.offset = vec(0, 0)
         self.offset_float = vec(0, 0)
-        self.CONST = vec(-self.DISPLAY_W/3 + player.rect.w/3, -100)
+        self.CONST = vec(-self.DISPLAY_W/3 + player.rect.w/3, -self.DISPLAY_H + 100)
 
     def setmethod(self, method):
         self.method = method
