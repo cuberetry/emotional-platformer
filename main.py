@@ -16,5 +16,6 @@ if __name__ == '__main__':
     emotion_thread.start()
 
     while gb_var.IS_RUNNING:
-        gb_var.EMOTION = main_emotion_detector.label
+        if not gb_var.IS_PAUSING:
+            gb_var.EMOTION = main_emotion_detector.label
         gb_var.CUR_SCENE.mainloop()
