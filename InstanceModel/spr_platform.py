@@ -1,18 +1,19 @@
 import pygame
 import GlobalVariable.sprite_group as gb_spr
+import GlobalVariable.game_var as gb_var
 
 vec = pygame.math.Vector2
 
 
 class Platform(pygame.sprite.Sprite):
-    def __init__(self, state, x, y):
+    def __init__(self, x, y):
         super().__init__()
         gb_spr.all_sprites.add(self)
         gb_spr.env_sprites.add(self)
 
         # Rendering setup
         self.surf = pygame.Surface((16, 16))
-        self.surf.fill(state)
+        self.surf.fill(gb_var.PLATFORM_STATE_COLOR['pp'])
         self.rect = self.surf.get_rect()
         self.rect.x, self.rect.y = x, y
 
