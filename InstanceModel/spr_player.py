@@ -3,6 +3,7 @@ from pygame.locals import *
 import GlobalVariable.game_var as gb_var
 import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.sprite_group as gb_spr
+from InstanceModel import spr_pause_menu as pause_menu
 
 vec = pygame.math.Vector2
 
@@ -13,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.emotion_state = gb_var.EMOTION
         gb_spr.all_sprites.add(self)
         gb_spr.player_sprites.add(self)
+        # self.pause_menu = pause_menu.PauseMenu()
 
         # Rendering setup
         self.surf = pygame.Surface((30, 30))
@@ -29,9 +31,12 @@ class Player(pygame.sprite.Sprite):
 
     # Simple movement
     def move(self):
-        self.acc = vec(0, 0.5)
         # Input handling and movement logic
         pressed_keys = pygame.key.get_pressed()
+        if pressed_keys[K_ESCAPE]:
+            # self.pause_menu.activate_menu()
+            pass
+
         if pressed_keys[K_LEFT] or pressed_keys[K_a]:
             self.acc.x = -self.acc_rate
         if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
@@ -39,11 +44,14 @@ class Player(pygame.sprite.Sprite):
         if pressed_keys[K_SPACE] and self.vel.y == 0 and not self.jumped:
             self.jumped = True
             self.vel.y = -15
-
+        #
+        # if gb_var.IS_PAUSING:
+        #     return
         if self.jumped:
             if self.vel.y > 0:
                 self.jumped = False
 
+        self.acc = vec(0, 0.5)
         self.acc.x += self.vel.x * gb_var.FRICTION
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
@@ -57,6 +65,9 @@ class Player(pygame.sprite.Sprite):
 
     # Update instance status
     def update(self):
+        # if gb_var.IS_PAUSING:
+        #     self.pause_menu.render_menu()
+        #     return
         # Player emotion state update
         self.emotion_state = gb_var.EMOTION
         self.surf.fill(gb_var.STATE_COLOR[self.emotion_state])
