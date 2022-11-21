@@ -22,6 +22,8 @@ class EmotionDetector:
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         faces = self.face_classifier.detectMultiScale(gray, 1.3, 5)
 
+        if len(faces) == 0:
+            self.label = 'n'
         for (x, y, w, h) in faces:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
             roi_gray = gray[y:y + h, x:x + w]
