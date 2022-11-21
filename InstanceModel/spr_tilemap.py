@@ -3,6 +3,10 @@ import csv
 import os
 import GlobalVariable.game_var as gb_var
 import InstanceModel.spr_platform as platform
+import InstanceModel.spr_neutral_platform as neu_p
+import InstanceModel.spr_happy_platform as hap_p
+import InstanceModel.spr_fire_platform as fire_p
+import InstanceModel.spr_ice_platform as ice_p
 
 
 class TileMap:
@@ -37,15 +41,15 @@ class TileMap:
                 if tile == '0':
                     self.start_x, self.start_y = x * self.tile_size, y * self.tile_size
                 elif tile == '1':
-                    tiles.append(platform.Platform(gb_var.PLATFORM_STATE_COLOR['np'], x * self.tile_size, y * self.tile_size))
+                    tiles.append(platform.Platform(x * self.tile_size, y * self.tile_size))
                 elif tile == '2':
-                    tiles.append(platform.Platform(gb_var.PLATFORM_STATE_COLOR['hp'], x * self.tile_size, y * self.tile_size))
+                    tiles.append(neu_p.NeuPlatform(x * self.tile_size, y * self.tile_size))
                 elif tile == '3':
-                    tiles.append(platform.Platform(gb_var.PLATFORM_STATE_COLOR['ap'], x * self.tile_size, y * self.tile_size))
+                    tiles.append(hap_p.HapPlatform(x * self.tile_size, y * self.tile_size))
                 elif tile == '4':
-                    tiles.append(platform.Platform(gb_var.PLATFORM_STATE_COLOR['sp'], x * self.tile_size, y * self.tile_size))
+                    tiles.append(fire_p.FirePlatform(x * self.tile_size, y * self.tile_size))
                 elif tile == '5':
-                    tiles.append(platform.Platform(gb_var.PLATFORM_STATE_COLOR['wp'], x * self.tile_size, y * self.tile_size))
+                    tiles.append(ice_p.IcePlatform(x * self.tile_size, y * self.tile_size))
 
                 x += 1
 
