@@ -5,7 +5,7 @@ from GlobalVariable import game_var as gb_var
 class PauseMenu:
     def __init__(self):
         self.menu = pgm.Menu('Pause Menu', 400, 300, theme=pgm.themes.THEME_DARK)
-        self.menu.add.button('Continue', self.game_continue())
+        self.menu.add.button('Continue', self.game_continue)
         self.menu.add.button('Quit', pgm.events.EXIT)
         self.menu.disable()
 
