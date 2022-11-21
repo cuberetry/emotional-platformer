@@ -35,8 +35,7 @@ class Scene:
         for entity in gb_spr.all_sprites:
             if entity in gb_spr.camera_sprites:
                 continue
-            else:
-                gb_var.SURFACE.blit(entity.surf, (entity.rect.x - self.camera.offset.x, entity.rect.y - self.camera.offset.y))
+            gb_var.SURFACE.blit(entity.surf, (entity.rect.x - self.camera.offset.x, entity.rect.y - self.camera.offset.y))
 
         pygame.display.update()
         gb_var.FPS.tick(gb_setting.MAXFPS)
