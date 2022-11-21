@@ -9,10 +9,8 @@ class Scene:
     def __init__(self):
         self.P1 = Player()
         self.platform_1 = Platform(gb_setting.WIDTH, gb_setting.HEIGHT)
-        print("Created Scene0")
 
     def mainloop(self):
-        print("Im here")
         self.P1.move()
         self.P1.update()
         for event in pygame.event.get():
