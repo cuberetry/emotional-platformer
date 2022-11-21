@@ -44,7 +44,9 @@ class Player(pygame.sprite.Sprite):
         if pressed_keys[K_SPACE] and self.vel.y == 0 and not self.jumped:
             self.jumped = True
             self.vel.y = -15
-
+        if not pressed_keys[K_SPACE]:
+            if self.vel.y < -3:
+                self.vel.y = -3
         if gb_var.IS_PAUSING:
             return
         if self.jumped:
