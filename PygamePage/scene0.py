@@ -11,7 +11,7 @@ class Scene:
         self.P1 = Player()
 
         # Load stage
-        self.mapp = TileMap(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
+        self.mapp = TileMap(gb_setting.ROOT_PATH + "/StageData/stage01.csv")
         self.P1.rect.x, self.P1.rect.y = self.mapp.start_x, self.mapp.start_y
 
         self.camera = Camera(self.P1)
