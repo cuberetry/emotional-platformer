@@ -1,5 +1,5 @@
 import sys
-from InstanceModel.spr_platform import *
+from InstanceModel.spr_tilemap import *
 from InstanceModel.spr_camera import *
 from InstanceModel.spr_player import *
 import GlobalVariable.game_setting as gb_setting
@@ -10,10 +10,9 @@ class Scene:
     def __init__(self):
         self.P1 = Player()
 
-        # load stage
-        self.map = TileMap(gb_setting.ROOT_PATH + "/StageData/stage1.csv")
-
-        self.P1.rect.x, self.P1.rect.y = self.map.start_x, self.map.start_y
+        # Load stage
+        self.mapp = TileMap(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
+        self.P1.rect.x, self.P1.rect.y = self.mapp.start_x, self.mapp.start_y
 
         self.camera = Camera(self.P1)
         self.follow = Follow(self.camera, self.P1)
