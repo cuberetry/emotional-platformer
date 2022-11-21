@@ -10,3 +10,9 @@ EMOTION = 'n'
 FPS = None
 CUR_SCENE = None
 SURFACE = None
+PLATFORM_STATE_COLOR = {'np': (180, 180, 180),
+               'hp': (255, 230, 100),
+               'ap': (255, 100, 100),
+               'sp': (100, 100, 255),
+               'wp': (100, 255, 100)
+}
