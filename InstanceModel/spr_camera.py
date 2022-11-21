@@ -13,6 +13,7 @@ class Camera(pygame.sprite.Sprite):
     def __init__(self, player):
         super().__init__()
         gb_spr.all_sprites.add(self)
+        gb_spr.camera_sprites.add(self)
 
         # Rendering setup
         self.player = player
