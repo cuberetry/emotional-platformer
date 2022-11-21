@@ -9,13 +9,18 @@ from abc import ABC, abstractmethod
 vec = pygame.math.Vector2
 
 
-class Camera:
+class Camera(pygame.sprite.Sprite):
     def __init__(self, player):
+        super().__init__()
+        gb_spr.all_sprites.add(self)
+        gb_spr.camera_sprites.add(self)
+
+        # Rendering setup
         self.player = player
         self.DISPLAY_W, self.DISPLAY_H = gb_setting.WIDTH, gb_setting.HEIGHT
         self.offset = vec(0, 0)
         self.offset_float = vec(0, 0)
-        self.CONST = vec(-self.DISPLAY_W/3 + player.rect.w/3, -100)
+        self.CONST = vec(-self.DISPLAY_W/3 + player.rect.w/3, - self.DISPLAY_H + 100)
 
     def setmethod(self, method):
         self.method = method
