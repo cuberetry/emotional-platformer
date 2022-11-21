@@ -2,7 +2,6 @@ import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.game_var as gb_var
 import pygame
 from PygamePage import scene_main_menu
-from PygamePage import scene0
 
 
 class MainPygameWindow:
