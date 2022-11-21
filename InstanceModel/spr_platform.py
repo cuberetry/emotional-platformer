@@ -1,5 +1,6 @@
 import pygame
 import GlobalVariable.sprite_group as gb_spr
+import GlobalVariable.game_var as gb_var
 
 vec = pygame.math.Vector2
 
