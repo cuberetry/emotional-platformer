@@ -77,17 +77,21 @@ class Player(pygame.sprite.Sprite):
 
         # Collision detection
         hit_platform = pygame.sprite.spritecollide(self, gb_spr.env_sprites, False)
-        # Collide with player on top the platform
         if hit_platform:
+            # Collide with player on top the platform
             if self.vel.y > 0:
                 if self.pos.y < hit_platform[0].rect.bottom:
                     self.pos.y = hit_platform[0].rect.top + 1
                     self.vel.y = 0
                     self.jumped = False
-        # Collide with the player under the platform
-            if self.vel.y < 0:
-                if self.rect.top > hit_platform[0].rect.top:
+            # Collide with the player under the platform
+            elif self.vel.y < 0:
+                if self.pos.y > hit_platform[0].rect.top:
                     self.rect.top = hit_platform[0].rect.bottom
                     self.vel.y = 0
         # Collide with the player on the left of the platform
+        #     elif self.vel.x > 0:
+        #         if self.pos.x < hit_platform[0].rect.right:
+        #             self.pos.x = hit_platform[0].rect.left + 1
+        #             self.vel.x = 0
         # Collide with the player on the right of the platform
