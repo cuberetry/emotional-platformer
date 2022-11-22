@@ -1,7 +1,6 @@
 import pygame
 import csv
 import os
-import GlobalVariable.game_var as gb_var
 import InstanceModel.spr_platform as platform
 import InstanceModel.spr_neutral_platform as neu_p
 import InstanceModel.spr_happy_platform as hap_p
