@@ -23,46 +23,50 @@ class Player(pygame.sprite.Sprite):
         self.left_border, self.right_border = -50, 1450
 
         # Physic setup
-        self.acc_rate = acc_rate
-        self.pos = vec((10, 385))
-        self.vel = vec(0, 0)
-        self.acc = vec(0, 0)
+        self.direction = vec(0, 0)
+        self.speed = 5
+        self.gravity = 0.8
+        self.jump_speed = -16
         self.jumped = False
 
     # Simple movement
     def move(self):
-        self.acc = vec(0, 0.5)
-        # Input handling and movement logic
+        if gb_var.IS_PAUSING:
+            return
+        # Input handling
         pressed_keys = pygame.key.get_pressed()
         if pressed_keys[K_ESCAPE]:
             self.pause_menu.activate_menu()
-
-        if pressed_keys[K_LEFT] or pressed_keys[K_a]:
-            self.acc.x = -self.acc_rate
-        if pressed_keys[K_RIGHT] or pressed_keys[K_d]:
-            self.acc.x = self.acc_rate
-        if pressed_keys[K_SPACE] and self.vel.y == 0 and not self.jumped:
+        if pressed_keys[K_a] or pressed_keys[K_LEFT]:
+            self.direction.x = -1
+        elif pressed_keys[K_d] or pressed_keys[K_RIGHT]:
+            self.direction.x = 1
+        else:
+            self.direction.x = 0
+        if pressed_keys[K_SPACE] and not self.jumped and self.direction.y == 0:
             self.jumped = True
-            self.vel.y = -15
-        if not pressed_keys[K_SPACE]:
-            if self.vel.y < -3:
-                self.vel.y = -3
-        if gb_var.IS_PAUSING:
-            return
-        if self.jumped:
-            if self.vel.y > 0:
-                self.jumped = False
+            self.direction.y = self.jump_speed
 
-        self.acc.x += self.vel.x * gb_var.FRICTION
-        self.vel += self.acc
-        self.pos += self.vel + 0.5 * self.acc
-
-        if self.pos.x > gb_setting.WIDTH:
-            self.pos.x = 0
-        if self.pos.x < 0:
-            self.pos.x = gb_setting.WIDTH
-
-        self.rect.midbottom = self.pos
+        # Movement handling
+        self.rect.x += self.direction.x * self.speed
+        hit_platform = gb_spr.env_sprites
+        for entity in hit_platform.sprites():
+            if entity.rect.colliderect(self.rect):
+                if self.direction.x < 0:
+                    self.rect.left = entity.rect.right
+                elif self.direction.x > 0:
+                    self.rect.right = entity.rect.left
+        self.direction.y += self.gravity
+        self.rect.y += self.direction.y
+        for entity in hit_platform.sprites():
+            if entity.rect.colliderect(self.rect):
+                if self.direction.y > 0:
+                    self.rect.bottom = entity.rect.top
+                    self.direction.y = 0
+                    self.jumped = False
+                elif self.direction.y < 0:
+                    self.rect.top = entity.rect.bottom
+                    self.direction.y = 0
 
     # Update instance status
     def update(self):
@@ -74,9 +78,3 @@ class Player(pygame.sprite.Sprite):
         # Player emotion state update
         self.emotion_state = gb_var.EMOTION
         self.surf.fill(gb_var.STATE_COLOR[self.emotion_state])
-
-        # Collision detection
-        hit_platform = pygame.sprite.spritecollide(self, gb_spr.env_sprites, False)
-        if hit_platform:
-            self.pos.y = hit_platform[0].rect.top + 1
-            self.vel.y = 0
