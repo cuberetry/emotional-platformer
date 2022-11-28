@@ -27,12 +27,13 @@ class Player(pygame.sprite.Sprite):
         self.speed = 5
         self.gravity = 0.8
         self.jump_speed = -16
+        self.jumped = False
 
     # Simple movement
     def move(self):
         if gb_var.IS_PAUSING:
             return
-        # Input handling and movement logic
+        # Input handling
         pressed_keys = pygame.key.get_pressed()
         if pressed_keys[K_ESCAPE]:
             self.pause_menu.activate_menu()
@@ -42,8 +43,11 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = 1
         else:
             self.direction.x = 0
-        if pressed_keys[K_SPACE]:
+        if pressed_keys[K_SPACE] and not self.jumped and self.direction.y == 0:
+            self.jumped = True
             self.direction.y = self.jump_speed
+
+        # Movement handling
         self.rect.x += self.direction.x * self.speed
         hit_platform = gb_spr.env_sprites
         for entity in hit_platform.sprites():
@@ -59,6 +63,7 @@ class Player(pygame.sprite.Sprite):
                 if self.direction.y > 0:
                     self.rect.bottom = entity.rect.top
                     self.direction.y = 0
+                    self.jumped = False
                 elif self.direction.y < 0:
                     self.rect.top = entity.rect.bottom
                     self.direction.y = 0
