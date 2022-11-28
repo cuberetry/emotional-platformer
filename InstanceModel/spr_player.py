@@ -9,7 +9,7 @@ vec = pygame.math.Vector2
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, acc_rate=gb_var.ACCELERATION):
+    def __init__(self):
         super().__init__()
         self.emotion_state = gb_var.EMOTION
         gb_spr.all_sprites.add(self)
