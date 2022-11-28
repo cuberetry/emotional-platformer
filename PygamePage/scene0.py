@@ -15,8 +15,8 @@ class Scene:
         self.mapp = TileMap(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
         self.P1.rect.x, self.P1.rect.y = self.mapp.start_x, self.mapp.start_y
 
-        self.boundary = Boundary(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
-        self.make_b = MakeB(self.P1, self.boundary)
+        self.boundary_map = BoundaryMap(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
+        self.boundary = Boundary(self.P1, self.boundary_map)
 
         self.camera = Camera(self.P1)
         self.follow = Follow(self.camera, self.P1)
@@ -26,7 +26,7 @@ class Scene:
 
     def mainloop(self):
         self.P1.move()
-        self.make_b.line()
+        self.boundary.line()
         self.P1.update()
         for event in pygame.event.get():
             if event.type == QUIT:
