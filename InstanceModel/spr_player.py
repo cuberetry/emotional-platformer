@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 import GlobalVariable.game_var as gb_var
+import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.sprite_group as gb_spr
 from InstanceModel import spr_pause_menu as pause_menu
 
@@ -8,7 +9,7 @@ vec = pygame.math.Vector2
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, acc_rate=gb_var.ACCELERATION):
         super().__init__()
         self.emotion_state = gb_var.EMOTION
         gb_spr.all_sprites.add(self)
@@ -23,12 +24,10 @@ class Player(pygame.sprite.Sprite):
 
         # Physic setup
         self.direction = vec(0, 0)
-        self.speed = 8
+        self.speed = 5
         self.gravity = 0.8
         self.jump_speed = -16
         self.jumped = False
-        self.acc = gb_var.ACCELERATION
-        self.friction = gb_var.FRICTION
 
     # Simple movement
     def move(self):
@@ -49,7 +48,7 @@ class Player(pygame.sprite.Sprite):
             self.direction.y = self.jump_speed
 
         # Movement handling
-        self.rect.x += self.direction.x * (self.speed + 0.5 * self.acc * self.friction)
+        self.rect.x += self.direction.x * self.speed
         hit_platform = gb_spr.env_sprites
         for entity in hit_platform.sprites():
             if entity.rect.colliderect(self.rect):
