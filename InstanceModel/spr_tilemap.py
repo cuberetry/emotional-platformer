@@ -17,6 +17,7 @@ class TileMap:
         self.map_surface = pygame.Surface((self.map_w, self.map_h))
         self.map_surface.set_colorkey((0, 0, 0))
         self.load_map()
+        # self.map_w = 400
 
     def load_map(self):
         for tile in self.tiles:
@@ -57,3 +58,16 @@ class TileMap:
             # Store the size of the tile mapp
         self.map_w, self.map_h = x * self.tile_size, y * self.tile_size
         return tiles
+
+    def tile_map_w(self):
+        return self.map_w
+
+
+class MapWidth(TileMap):
+    def __init__(self):
+        super().__init__(self)
+        self.map_width = self.map_w
+
+    def tile_map_w(self):
+        return self.map_width
+
