@@ -77,4 +77,8 @@ class Player(pygame.sprite.Sprite):
 
         # Player emotion state update
         self.emotion_state = gb_var.EMOTION
+        if self.emotion_state == 'h':
+            self.speed = 10
+        else:
+            self.speed = 5
         self.surf.fill(gb_var.STATE_COLOR[self.emotion_state])
