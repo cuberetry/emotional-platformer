@@ -23,7 +23,6 @@ class Player(pygame.sprite.Sprite):
 
         # Physic setup
         self.direction = vec(0, 0)
-        self.pos = vec(0, 0)
         self.speed = 5
         self.gravity = 0.8
         self.jump_speed = -16

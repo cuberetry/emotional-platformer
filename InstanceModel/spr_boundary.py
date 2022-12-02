@@ -6,8 +6,8 @@ class BoundaryMap(tm.TileMap):
     def __init__(self, filename):
         super().__init__(filename)
 
-        self.left_border_x, self.right_border_x = -10, tm.TileMap(filename).map_w
-        self.top_border_y, self.bottom_border_y = 0, 50
+        self.left_border_x, self.right_border_x = -20, tm.TileMap(filename).map_w
+        self.top_border_y, self.bottom_border_y = 0, gb_setting.HEIGHT
 
 
 class Boundary:
@@ -16,12 +16,10 @@ class Boundary:
         self.boundary = boundary
 
     def line(self):
-        print(self.player.pos.y)
-        # print(self.player.pos.x)
-        if self.player.pos.x > self.boundary.right_border_x:
-            self.player.pos.x = 0
-        if self.player.pos.x < 0:
-            self.player.pos.x = self.boundary.right_border_x
-        if self.player.pos.y > self.boundary.bottom_border_y:
-            self.player.pos.x = 0
-            self.player.pos.y = -10
+        if self.player.rect.x > self.boundary.right_border_x:
+            self.player.rect.x = 0
+        if self.player.rect.x < self.boundary.left_border_x:
+            self.player.rect.x = self.boundary.right_border_x
+        if self.player.rect.y > self.boundary.bottom_border_y:
+            self.player.rect.x = 0
+            self.player.rect.y = 0
