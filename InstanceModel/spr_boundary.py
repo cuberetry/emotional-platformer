@@ -21,12 +21,12 @@ class Boundary(SetBoundaryVariable):
         SetBoundaryVariable.__init__(self, player, boundary)
 
     def line(self):
-        if self.player.pos.x > self.boundary.right_border_x:
-            self.player.pos.x = 0
-        if self.player.pos.x < 0:
-            self.player.pos.x = self.boundary.right_border_x
-        if self.player.pos.y > self.boundary.bottom_border_y:
-            self.player.pos.x = 0
-            self.player.pos.y = 0
+        if self.player.direction.x > self.boundary.right_border_x:
+            self.player.direction.x = 0
+        if self.player.direction.x < 0:
+            self.player.direction.x = self.boundary.right_border_x
+        if self.player.direction.y > self.boundary.bottom_border_y:
+            self.player.direction.x = 0
+            self.player.direction.y = 0
 
 
