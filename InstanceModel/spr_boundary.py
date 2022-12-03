@@ -21,5 +21,4 @@ class Boundary:
         if self.player.rect.x < self.boundary.left_border_x:
             self.player.rect.x = self.boundary.right_border_x
         if self.player.rect.y > self.boundary.bottom_border_y:
-            self.player.rect.x = 0
-            self.player.rect.y = 0
+            self.player.player_kill()
