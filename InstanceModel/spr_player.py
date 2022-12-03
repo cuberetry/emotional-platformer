@@ -57,6 +57,12 @@ class Player(pygame.sprite.Sprite):
                     else:
                         self.player_kill()
                         return
+                if entity in gb_spr.ice_sprites:
+                    if self.emotion_state == 'a':
+                        entity.kill()
+                    else:
+                        self.player_kill()
+                        return
                 if self.direction.x < 0:
                     self.rect.left = entity.rect.right
                 elif self.direction.x > 0:
@@ -67,6 +73,12 @@ class Player(pygame.sprite.Sprite):
             if entity.rect.colliderect(self.rect):
                 if entity in gb_spr.fire_sprites:
                     if self.emotion_state == 's':
+                        entity.kill()
+                    else:
+                        self.player_kill()
+                        return
+                if entity in gb_spr.ice_sprites:
+                    if self.emotion_state == 'a':
                         entity.kill()
                     else:
                         self.player_kill()
@@ -108,5 +120,3 @@ class Player(pygame.sprite.Sprite):
 
     def player_kill(self):
         self.rect.x, self.rect.y = gb_var.CHECKPOINT
-        self.direction = vec(0, 0)
-        self.jumped = False
