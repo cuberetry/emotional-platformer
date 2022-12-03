@@ -19,6 +19,9 @@ class Goal(pygame.sprite.Sprite):
         gb_spr.all_sprites.add(self)
         gb_spr.goal_sprites.add(self)
 
+    def draw(self, surface):
+        surface.blit(self.surf, (self.rect.x, self.rect.y))
+
     def update(self):
         if self.cur_color[self.cur_color_p] < 255 and self.increasing:
             self.cur_color[self.cur_color_p] += 1

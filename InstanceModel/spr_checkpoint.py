@@ -19,6 +19,9 @@ class Checkpoint(pygame.sprite.Sprite):
         gb_spr.all_sprites.add(self)
         gb_spr.checkpoint_sprites.add(self)
 
+    def draw(self, surface):
+        surface.blit(self.surf, (self.rect.x, self.rect.y))
+
     def save_checkpoint(self):
         gb_var.CHECKPOINT = [self.x, self.y]
         self.kill()

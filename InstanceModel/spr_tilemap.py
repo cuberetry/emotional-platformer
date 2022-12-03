@@ -6,7 +6,9 @@ import InstanceModel.spr_neutral_platform as neu_p
 import InstanceModel.spr_happy_platform as hap_p
 import InstanceModel.spr_fire_platform as fire_p
 import InstanceModel.spr_ice_platform as ice_p
-
+import InstanceModel.spr_checkpoint as cp
+import InstanceModel.spr_enemy as em
+import InstanceModel.spr_goal as goal
 
 class TileMap:
     def __init__(self, filename):
@@ -34,9 +36,9 @@ class TileMap:
         for row in map_grid:
             x = 0
             for tile in row:
-                if tile == '0':
-                    self.start_x, self.start_y = x * self.tile_size, y * self.tile_size
-                elif tile == '1':
+                # if tile == '0':
+                #     self.start_x, self.start_y = x * self.tile_size, y * self.tile_size
+                if tile == '1':
                     tiles.append(platform.Platform(x * self.tile_size, y * self.tile_size))
                 elif tile == '2':
                     tiles.append(neu_p.NeuPlatform(x * self.tile_size, y * self.tile_size))
@@ -46,6 +48,12 @@ class TileMap:
                     tiles.append(fire_p.FirePlatform(x * self.tile_size, y * self.tile_size))
                 elif tile == '5':
                     tiles.append(ice_p.IcePlatform(x * self.tile_size, y * self.tile_size))
+                elif tile == '6':
+                    tiles.append(em.Enemy(x * self.tile_size, y * self.tile_size))
+                elif tile == '7':
+                    tiles.append(cp.Checkpoint(x * self.tile_size, y * self.tile_size))
+                elif tile == '8':
+                    tiles.append(goal.Goal(x * self.tile_size, y * self.tile_size))
 
                 x += 1
 
