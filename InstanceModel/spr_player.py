@@ -53,6 +53,7 @@ class Player(pygame.sprite.Sprite):
             if entity.rect.colliderect(self.rect):
                 if entity in gb_spr.fire_sprites:
                     print("hit")
+                    
                 if self.direction.x < 0:
                     self.rect.left = entity.rect.right
                 elif self.direction.x > 0:

@@ -19,7 +19,6 @@ class Scene:
 
         self.boundary_map = BoundaryMap(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
         self.boundary = Boundary(self.P1, self.boundary_map)
-        self.fire_platform_hit = FirePlatformHit(self.P1)
 
         self.camera = Camera(self.P1)
         self.follow = Follow(self.camera, self.P1)
@@ -30,7 +29,6 @@ class Scene:
     def mainloop(self):
         self.P1.move()
         self.boundary.line()
-        # self.fire_platform_hit.hit()
         self.P1.update()
         for entity in gb_spr.enemy_sprites:
             entity.update()
