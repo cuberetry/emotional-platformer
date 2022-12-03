@@ -16,3 +16,4 @@ neu_sprites = pygame.sprite.Group()
 # Other Environment Sprites
 enemy_sprites = pygame.sprite.Group()
 checkpoint_sprites = pygame.sprite.Group()
+goal_sprites = pygame.sprite.Group()
