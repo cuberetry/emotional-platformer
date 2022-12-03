@@ -103,6 +103,13 @@ class Player(pygame.sprite.Sprite):
             if entity.rect.colliderect(self.rect):
                 entity.save_checkpoint()
 
+        # Goal collision
+        hit_goal = gb_spr.goal_sprites
+        for entity in hit_goal.sprites():
+            if entity.rect.colliderect(self.rect):
+                entity.kill()
+                self.reach_goal()
+
     # Update instance status
     def update(self):
         # Pausing
@@ -120,3 +127,10 @@ class Player(pygame.sprite.Sprite):
 
     def player_kill(self):
         self.rect.x, self.rect.y = gb_var.CHECKPOINT
+        self.direction = vec(0, 0)
+        self.jumped = False
+
+    @ staticmethod
+    def reach_goal():
+        print("Reached goal")
+        exit(0)
