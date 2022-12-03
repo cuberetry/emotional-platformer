@@ -83,6 +83,12 @@ class Player(pygame.sprite.Sprite):
             if entity.rect.colliderect(self.rect):
                 self.player_kill()
 
+        # Checkpoint collision
+        hit_checkpoint = gb_spr.checkpoint_sprites
+        for entity in hit_checkpoint.sprites():
+            if entity.rect.colliderect(self.rect):
+                entity.save_checkpoint()
+
     # Update instance status
     def update(self):
         # Pausing
@@ -98,6 +104,5 @@ class Player(pygame.sprite.Sprite):
             self.speed = 5
         self.surf.fill(gb_var.STATE_COLOR[self.emotion_state])
 
-    @staticmethod
-    def player_kill():
-        print("The player has fallen!")
+    def player_kill(self):
+        self.rect.x, self.rect.y = gb_var.CHECKPOINT
