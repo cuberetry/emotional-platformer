@@ -11,6 +11,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.emotion_state = gb_var.EMOTION
+        self.is_dead = False
         gb_spr.all_sprites.add(self)
         gb_spr.player_sprites.add(self)
         self.pause_menu = pause_menu.PauseMenu()
@@ -36,6 +37,10 @@ class Player(pygame.sprite.Sprite):
         pressed_keys = pygame.key.get_pressed()
         if pressed_keys[K_ESCAPE]:
             self.pause_menu.activate_menu()
+        if self.is_dead:
+            if pressed_keys[K_SPACE]:
+                self.respawn()
+            return
         if pressed_keys[K_a] or pressed_keys[K_LEFT]:
             self.direction.x = -1
         elif pressed_keys[K_d] or pressed_keys[K_RIGHT]:
@@ -116,6 +121,9 @@ class Player(pygame.sprite.Sprite):
         if gb_var.IS_PAUSING:
             self.pause_menu.render_menu()
             return
+        # Dead
+        if self.is_dead:
+            return
 
         # Player emotion state update
         self.emotion_state = gb_var.EMOTION
@@ -126,9 +134,15 @@ class Player(pygame.sprite.Sprite):
         self.surf.fill(gb_var.STATE_COLOR[self.emotion_state])
 
     def player_kill(self):
+        self.surf.set_alpha(0)
+        self.is_dead = True
+
+    def respawn(self):
         self.rect.x, self.rect.y = gb_var.CHECKPOINT
         self.direction = vec(0, 0)
         self.jumped = False
+        self.surf.set_alpha(None)
+        self.is_dead = False
 
     @ staticmethod
     def reach_goal():
