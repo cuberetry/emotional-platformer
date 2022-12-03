@@ -1,7 +1,4 @@
-import pygame
-
 from InstanceModel.spr_player import *
-import GlobalVariable.game_var as gb_var
 import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.sprite_group as gb_spr
 from abc import ABC, abstractmethod
@@ -21,8 +18,9 @@ class Camera(pygame.sprite.Sprite):
         self.offset = vec(0, 0)
         self.offset_float = vec(0, 0)
         self.CONST = vec(-self.DISPLAY_W/3 + player.rect.w/3, - self.DISPLAY_H + 100)
+        self.method = None
 
-    def setmethod(self, method):
+    def set_method(self, method):
         self.method = method
 
     def scroll(self):
@@ -67,4 +65,3 @@ class Auto(CamScroll):
 
     def scroll(self):
         self.camera.offset.x += 1
-
