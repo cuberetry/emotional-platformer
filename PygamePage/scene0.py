@@ -3,6 +3,7 @@ from InstanceModel.spr_tilemap import *
 from InstanceModel.spr_camera import *
 from InstanceModel.spr_player import *
 from InstanceModel.spr_boundary import *
+from InstanceModel.spr_fireplatform_interaction import *
 import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.sprite_group as gb_spr
 
@@ -17,6 +18,7 @@ class Scene:
 
         self.boundary_map = BoundaryMap(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
         self.boundary = Boundary(self.P1, self.boundary_map)
+        self.fire_platform_hit = FirePlatformHit(self.P1)
 
         self.camera = Camera(self.P1)
         self.follow = Follow(self.camera, self.P1)
@@ -27,6 +29,7 @@ class Scene:
     def mainloop(self):
         self.P1.move()
         self.boundary.line()
+        # self.fire_platform_hit.hit()
         self.P1.update()
         for event in pygame.event.get():
             if event.type == QUIT:
