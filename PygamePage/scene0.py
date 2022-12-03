@@ -23,7 +23,7 @@ class Scene:
         self.follow = Follow(self.camera, self.P1)
         self.border = Border(self.camera, self.P1)
         self.auto = Auto(self.camera, self.P1)
-        self.camera.setmethod(self.border)
+        self.camera.set_method(self.border)
 
     def mainloop(self):
         self.P1.move()
