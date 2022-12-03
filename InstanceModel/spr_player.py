@@ -56,6 +56,7 @@ class Player(pygame.sprite.Sprite):
                         entity.kill()
                     else:
                         self.player_kill()
+                        return
                 if self.direction.x < 0:
                     self.rect.left = entity.rect.right
                 elif self.direction.x > 0:
@@ -69,6 +70,7 @@ class Player(pygame.sprite.Sprite):
                         entity.kill()
                     else:
                         self.player_kill()
+                        return
                 if self.direction.y > 0:
                     self.rect.bottom = entity.rect.top
                     self.direction.y = 0
@@ -106,3 +108,5 @@ class Player(pygame.sprite.Sprite):
 
     def player_kill(self):
         self.rect.x, self.rect.y = gb_var.CHECKPOINT
+        self.direction = vec(0, 0)
+        self.jumped = False
