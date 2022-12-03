@@ -4,6 +4,7 @@ from InstanceModel.spr_camera import *
 from InstanceModel.spr_player import *
 from InstanceModel.spr_boundary import *
 from InstanceModel.spr_fireplatform_interaction import *
+from InstanceModel.spr_enemy import *
 import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.sprite_group as gb_spr
 
@@ -24,13 +25,15 @@ class Scene:
         self.follow = Follow(self.camera, self.P1)
         self.border = Border(self.camera, self.P1)
         self.auto = Auto(self.camera, self.P1)
-        self.camera.setmethod(self.border)
+        self.camera.set_method(self.border)
 
     def mainloop(self):
         self.P1.move()
         self.boundary.line()
         # self.fire_platform_hit.hit()
         self.P1.update()
+        for entity in gb_spr.enemy_sprites:
+            entity.update()
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
