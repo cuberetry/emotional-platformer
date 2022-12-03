@@ -47,8 +47,8 @@ class Player(pygame.sprite.Sprite):
             self.direction.y = self.jump_speed
 
         # Movement handling
-        self.rect.x += self.direction.x * self.speed
         hit_platform = gb_spr.env_sprites
+        self.rect.x += self.direction.x * self.speed
         for entity in hit_platform.sprites():
             if entity.rect.colliderect(self.rect):
                 if self.direction.x < 0:
@@ -67,6 +67,12 @@ class Player(pygame.sprite.Sprite):
                     self.rect.top = entity.rect.bottom
                     self.direction.y = 0
 
+        # Enemy collision
+        hit_enemy = gb_spr.enemy_sprites
+        for entity in hit_enemy.sprites():
+            if entity.rect.colliderect(self.rect):
+                self.player_kill()
+
     # Update instance status
     def update(self):
         # Pausing
@@ -81,3 +87,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.speed = 5
         self.surf.fill(gb_var.STATE_COLOR[self.emotion_state])
+
+    @staticmethod
+    def player_kill():
+        print("The player has fallen!")
