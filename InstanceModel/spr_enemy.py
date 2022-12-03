@@ -6,7 +6,7 @@ vec = pygame.math.Vector2
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x, y):
         super().__init__()
         gb_spr.all_sprites.add(self)
         gb_spr.enemy_sprites.add(self)
@@ -14,8 +14,8 @@ class Enemy(pygame.sprite.Sprite):
         # Rendering setup
         self.surf = pygame.Surface((30, 30))
         self.surf.fill((0, 150, 75))
-        self.rect = self.surf.get_rect(center=(10, 420))
-        self.left_border, self.right_border = -50, 1450
+        self.rect = self.surf.get_rect()
+        self.rect.x, self.rect.y = x, y
 
         # Physic setup
         self.direction = vec(1, 0)
