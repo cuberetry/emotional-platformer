@@ -12,10 +12,10 @@ class Scene:
         self.P1 = Player()
 
         # Load stage
-        self.scene_map = TileMap(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
+        self.scene_map = TileMap(gb_setting.ROOT_PATH + "/StageData/stage01.csv")
         self.P1.rect.x, self.P1.rect.y = self.scene_map.start_x, self.scene_map.start_y
 
-        self.boundary_map = BoundaryMap(gb_setting.ROOT_PATH + "/StageData/stage_test.csv")
+        self.boundary_map = BoundaryMap(gb_setting.ROOT_PATH + "/StageData/stage01.csv")
         self.boundary = Boundary(self.P1, self.boundary_map)
 
         self.camera = Camera(self.P1)
