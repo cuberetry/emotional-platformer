@@ -12,6 +12,7 @@ class TileMap:
     def __init__(self, filename):
         self.tile_size = 16
         self.start_x, self.start_y = 0, 0
+        self.map_h, self.map_w = None, None
 
         self.tiles = self.load_tiles(filename)
         self.map_surface = pygame.Surface((self.map_w, self.map_h))
@@ -22,19 +23,15 @@ class TileMap:
         for tile in self.tiles:
             tile.draw(self.map_surface)
 
-    def read_csv(self, filename):
-        mapp = []
+    def load_tiles(self, filename):
+        tiles = []
+        map_grid = []
         with open(os.path.join(filename)) as data:
             data = csv.reader(data, delimiter=',')
             for row in data:
-                mapp.append(list(row))
-        return mapp
-
-    def load_tiles(self, filename):
-        tiles = []
-        mapp = self.read_csv(filename)
+                map_grid.append(list(row))
         x, y = 0, 0
-        for row in mapp:
+        for row in map_grid:
             x = 0
             for tile in row:
                 if tile == '0':
@@ -57,6 +54,3 @@ class TileMap:
             # Store the size of the tile mapp
         self.map_w, self.map_h = x * self.tile_size, y * self.tile_size
         return tiles
-
-
-
