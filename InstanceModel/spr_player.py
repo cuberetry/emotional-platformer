@@ -52,8 +52,10 @@ class Player(pygame.sprite.Sprite):
         for entity in hit_platform.sprites():
             if entity.rect.colliderect(self.rect):
                 if entity in gb_spr.fire_sprites:
-                    print("hit")
-                    
+                    if self.emotion_state == 's':
+                        entity.kill()
+                    else:
+                        self.player_kill()
                 if self.direction.x < 0:
                     self.rect.left = entity.rect.right
                 elif self.direction.x > 0:
@@ -63,7 +65,10 @@ class Player(pygame.sprite.Sprite):
         for entity in hit_platform.sprites():
             if entity.rect.colliderect(self.rect):
                 if entity in gb_spr.fire_sprites:
-                    print("hit")
+                    if self.emotion_state == 's':
+                        entity.kill()
+                    else:
+                        self.player_kill()
                 if self.direction.y > 0:
                     self.rect.bottom = entity.rect.top
                     self.direction.y = 0

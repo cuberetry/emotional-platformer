@@ -3,7 +3,6 @@ from InstanceModel.spr_tilemap import *
 from InstanceModel.spr_camera import *
 from InstanceModel.spr_player import *
 from InstanceModel.spr_boundary import *
-from InstanceModel.spr_fireplatform_interaction import *
 from InstanceModel.spr_enemy import *
 import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.sprite_group as gb_spr
