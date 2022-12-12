@@ -34,7 +34,13 @@ class Enemy(pygame.sprite.Sprite):
         # Movement and platform collision
         self.rect.x += self.direction.x * self.speed
         hit_platform = gb_spr.env_sprites
+        hit_enemy = gb_spr.enemy_sprites
         for entity in hit_platform.sprites():
+            if self.rect.colliderect(entity):
+                self.direction.x = -self.direction.x
+        for entity in hit_enemy:
+            if entity is self:
+                continue
             if self.rect.colliderect(entity):
                 self.direction.x = -self.direction.x
         self.direction.y += self.gravity
