@@ -10,6 +10,7 @@ import InstanceModel.spr_checkpoint as cp
 import InstanceModel.spr_enemy as em
 import InstanceModel.spr_goal as goal
 
+
 class TileMap:
     def __init__(self, filename):
         self.tile_size = 16
@@ -36,8 +37,6 @@ class TileMap:
         for row in map_grid:
             x = 0
             for tile in row:
-                # if tile == '0':
-                #     self.start_x, self.start_y = x * self.tile_size, y * self.tile_size
                 if tile == '1':
                     tiles.append(platform.Platform(x * self.tile_size, y * self.tile_size))
                 elif tile == '2':
