@@ -64,3 +64,15 @@ class Scene:
 
         pygame.display.update()
         gb_var.FPS.tick(gb_setting.MAXFPS)
+
+    def change_scene(self, new_scene):
+        for entity in gb_spr.all_sprites:
+            entity.kill()
+        gb_var.CUR_SCENE = new_scene
+        del self
+
+    def restart(self):
+        for entity in gb_spr.all_sprites:
+            entity.kill()
+        gb_var.CUR_SCENE = Scene()
+        del self
