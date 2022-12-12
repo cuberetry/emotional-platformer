@@ -28,6 +28,7 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0.8
         self.jump_speed = -16
         self.jumped = False
+        self.visible = True
 
     # Simple movement
     def move(self):
@@ -96,10 +97,14 @@ class Player(pygame.sprite.Sprite):
                     self.rect.top = entity.rect.bottom
                     self.direction.y = 0
 
+        if self.emotion_state == 'w':
+            self.visible = False
+
         # Enemy collision
         hit_enemy = gb_spr.enemy_sprites
         for entity in hit_enemy.sprites():
-            if entity.rect.colliderect(self.rect):
+
+            if entity.rect.colliderect(self.rect) and (self.visible is True):
                 self.player_kill()
 
         # Checkpoint collision
