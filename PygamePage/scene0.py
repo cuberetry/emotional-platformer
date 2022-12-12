@@ -24,6 +24,16 @@ class Scene:
         self.auto = Auto(self.camera, self.P1)
         self.camera.set_method(self.border)
 
+        # Game over text
+        self.game_over_text = gb_setting.FONT_GAME_OVER.render('GAME OVER', True, (255, 255, 255))
+        self.restart_text = gb_setting.FONT_PRESS_SPACE.render('Press Space Bar to Restart', True, (255, 255, 255))
+        self.game_over_rect = self.game_over_text.get_rect()
+        self.restart_rect = self.restart_text.get_rect()
+        self.screen_fill = pygame.Surface((gb_var.SURFACE.get_width(), gb_var.SURFACE.get_height()))
+        self.screen_fill.fill((0, 0, 0))
+        self.screen_fill.set_alpha(128)
+        self.screen_fill_rect = self.screen_fill.get_rect()
+
     def mainloop(self):
         self.P1.move()
         self.boundary.line()
@@ -44,6 +54,13 @@ class Scene:
                 continue
             gb_var.SURFACE.blit(entity.surf, (entity.rect.x - self.camera.offset.x,
                                               entity.rect.y - self.camera.offset.y))
+
+        if self.P1.is_dead:
+            self.game_over_rect.center = (gb_var.SURFACE.get_width() // 2, gb_var.SURFACE.get_height() // 2)
+            self.restart_rect.center = (gb_var.SURFACE.get_width() // 2, gb_var.SURFACE.get_height() // 2 + 25)
+            gb_var.SURFACE.blit(self.screen_fill, self.screen_fill_rect)
+            gb_var.SURFACE.blit(self.game_over_text, self.game_over_rect)
+            gb_var.SURFACE.blit(self.restart_text, self.restart_rect)
 
         pygame.display.update()
         gb_var.FPS.tick(gb_setting.MAXFPS)
