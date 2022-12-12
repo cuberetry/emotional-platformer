@@ -1,10 +1,11 @@
 import pygame_menu as pgm
 from GlobalVariable import game_var as gb_var
+from GlobalVariable import game_setting as gb_setting
 
 
 class PauseMenu:
     def __init__(self):
-        self.menu = pgm.Menu('Pause Menu', 400, 300, theme=pgm.themes.THEME_DARK)
+        self.menu = pgm.Menu('Pause Menu', gb_setting.WIDTH, gb_setting.HEIGHT, theme=pgm.themes.THEME_DARK)
         self.menu.add.button('Continue', self.game_continue)
         self.menu.add.button('Restart Stage', self.game_restart)
         self.menu.add.button('Quit', pgm.events.EXIT)
