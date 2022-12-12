@@ -1,14 +1,14 @@
 import pygame
 import csv
 import os
-import InstanceModel.spr_platform as platform
-import InstanceModel.spr_neutral_platform as neu_p
-import InstanceModel.spr_happy_platform as hap_p
-import InstanceModel.spr_fire_platform as fire_p
-import InstanceModel.spr_ice_platform as ice_p
-import InstanceModel.spr_checkpoint as cp
-import InstanceModel.spr_enemy as em
-import InstanceModel.spr_goal as goal
+import InstanceModel.Platform.spr_platform as platform
+import InstanceModel.Platform.spr_neutral_platform as neu_p
+import InstanceModel.Platform.spr_happy_platform as hap_p
+import InstanceModel.Platform.spr_fire_platform as fire_p
+import InstanceModel.Platform.spr_ice_platform as ice_p
+import InstanceModel.Environment.spr_checkpoint as cp
+import InstanceModel.Environment.spr_enemy as em
+import InstanceModel.Environment.spr_goal as goal
 
 
 class TileMap:

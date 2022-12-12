@@ -1,6 +1,6 @@
 import GlobalVariable.sprite_group as gb_spr
 import GlobalVariable.game_var as gb_var
-import InstanceModel.spr_platform as platform_model
+import InstanceModel.Platform.spr_platform as platform_model
 
 
 class IcePlatform(platform_model.Platform):

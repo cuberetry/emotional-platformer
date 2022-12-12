@@ -1,8 +1,8 @@
 import sys
-from InstanceModel.spr_tilemap import *
-from InstanceModel.spr_camera import *
+from InstanceModel.System.spr_tilemap import *
+from InstanceModel.System.spr_camera import *
 from InstanceModel.spr_player import *
-from InstanceModel.spr_boundary import *
+from InstanceModel.System.spr_boundary import *
 import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.sprite_group as gb_spr
 
@@ -64,3 +64,15 @@ class Scene:
 
         pygame.display.update()
         gb_var.FPS.tick(gb_setting.MAXFPS)
+
+    def change_scene(self, new_scene):
+        for entity in gb_spr.all_sprites:
+            entity.kill()
+        gb_var.CUR_SCENE = new_scene
+        del self
+
+    def restart(self):
+        for entity in gb_spr.all_sprites:
+            entity.kill()
+        gb_var.CUR_SCENE = Scene()
+        del self

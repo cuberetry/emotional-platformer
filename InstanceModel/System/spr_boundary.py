@@ -1,4 +1,4 @@
-from InstanceModel import spr_tilemap as tm
+from InstanceModel.System import spr_tilemap as tm
 import GlobalVariable.game_setting as gb_setting
 
 

@@ -19,3 +19,4 @@ if __name__ == '__main__':
         if not gb_var.IS_PAUSING:
             gb_var.EMOTION = main_emotion_detector.label
         gb_var.CUR_SCENE.mainloop()
+    emotion_thread.join()
