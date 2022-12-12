@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 import GlobalVariable.game_var as gb_var
 import GlobalVariable.sprite_group as gb_spr
-from InstanceModel import spr_pause_menu as pause_menu
+from InstanceModel.System import spr_pause_menu as pause_menu
 
 vec = pygame.math.Vector2
 
