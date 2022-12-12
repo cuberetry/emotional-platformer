@@ -22,6 +22,9 @@ class Enemy(pygame.sprite.Sprite):
         self.speed = 1
         self.gravity = 0.8
 
+    def draw(self, surface):
+        surface.blit(self.surf, (self.rect.x, self.rect.y))
+
     # Update instance status
     def update(self):
         # Pausing
