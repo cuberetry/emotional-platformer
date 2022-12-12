@@ -7,7 +7,7 @@ vec = pygame.math.Vector2
 
 
 class Camera(pygame.sprite.Sprite):
-    def __init__(self, player):
+    def __init__(self, player, boundary):
         super().__init__()
         gb_spr.all_sprites.add(self)
         gb_spr.camera_sprites.add(self)
@@ -19,6 +19,8 @@ class Camera(pygame.sprite.Sprite):
         self.offset_float = vec(0, 0)
         self.CONST = vec(-self.DISPLAY_W/3 + player.rect.w/3, - self.DISPLAY_H + 100)
         self.method = None
+        self.right_border = boundary.right_border_x+30
+        self.left_border = boundary.left_border_x
 
     def set_method(self, method):
         self.method = method
@@ -53,8 +55,8 @@ class Border(CamScroll):
     def scroll(self):
         self.camera.offset_float.x += (self.player.rect.x - self.camera.offset_float.x + self.camera.CONST.x)
         self.camera.offset.x, self.camera.offset.y = int(self.camera.offset_float.x), int(self.camera.offset_float.y)
-        self.camera.offset.x = max(self.player.left_border, self.camera.offset.x)
-        self.camera.offset.x = min(self.camera.offset.x, self.player.right_border - self.camera.DISPLAY_W)
+        self.camera.offset.x = max(self.camera.left_border, self.camera.offset.x)
+        self.camera.offset.x = min(self.camera.offset.x, self.camera.right_border - self.camera.DISPLAY_W)
 
 
 class Auto(CamScroll):

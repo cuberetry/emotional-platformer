@@ -18,7 +18,7 @@ class Scene:
         self.boundary_map = BoundaryMap(gb_setting.ROOT_PATH + "/StageData/stage01.csv")
         self.boundary = Boundary(self.P1, self.boundary_map)
 
-        self.camera = Camera(self.P1)
+        self.camera = Camera(self.P1, self.boundary_map)
         self.follow = Follow(self.camera, self.P1)
         self.border = Border(self.camera, self.P1)
         self.auto = Auto(self.camera, self.P1)
