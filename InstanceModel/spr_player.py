@@ -137,7 +137,7 @@ class Player(pygame.sprite.Sprite):
         self.surf.set_alpha(0)
         self.is_dead = True
         self.jumped = True
-        
+
     def respawn(self):
         self.rect.x, self.rect.y = gb_var.CHECKPOINT
         self.direction = vec(0, 0)
