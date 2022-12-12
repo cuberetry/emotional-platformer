@@ -19,7 +19,7 @@ class Camera(pygame.sprite.Sprite):
         self.offset_float = vec(0, 0)
         self.CONST = vec(-self.DISPLAY_W/3 + player.rect.w/3, - self.DISPLAY_H + 100)
         self.method = None
-        self.right_border = boundary.right_border_x
+        self.right_border = boundary.right_border_x+30
         self.left_border = boundary.left_border_x
 
     def set_method(self, method):
