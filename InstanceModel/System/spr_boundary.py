@@ -18,9 +18,7 @@ class Boundary:
     def line(self):
         if self.player.rect.x >= self.boundary.right_border_x:
             self.player.rect.x = self.boundary.right_border_x
-            print("case1")
         elif self.player.rect.x <= self.boundary.left_border_x:
             self.player.rect.x = 0
-            print('case2')
         if self.player.rect.y >= self.boundary.bottom_border_y:
             self.player.player_kill()
