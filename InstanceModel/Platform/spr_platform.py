@@ -12,7 +12,7 @@ class Platform(pygame.sprite.Sprite):
         gb_spr.env_sprites.add(self)
 
         # Rendering setup
-        self.surf = pygame.Surface((16, 16))
+        self.surf = pygame.Surface((30, 30))
         self.surf.fill(gb_var.PLATFORM_STATE_COLOR['pp'])
         self.rect = self.surf.get_rect()
         self.rect.x, self.rect.y = x, y
