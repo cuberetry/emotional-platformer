@@ -13,7 +13,7 @@ import InstanceModel.Environment.spr_goal as goal
 
 class TileMap:
     def __init__(self, filename):
-        self.tile_size = 16
+        self.tile_size = 30
         self.start_x, self.start_y = 0, 0
         self.map_h, self.map_w = None, None
 
