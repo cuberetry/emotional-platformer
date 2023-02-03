@@ -12,7 +12,7 @@ class Enemy(pygame.sprite.Sprite):
         gb_spr.enemy_sprites.add(self)
 
         # Rendering setup
-        self.surf = pygame.Surface((30, 30))
+        self.surf = pygame.Surface((31, 31))
         self.surf.fill((0, 150, 75))
         self.rect = self.surf.get_rect()
         self.rect.x, self.rect.y = x, y
