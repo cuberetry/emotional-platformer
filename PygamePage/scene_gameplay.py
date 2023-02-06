@@ -9,6 +9,10 @@ import GlobalVariable.sprite_group as gb_spr
 
 class GameplayScene:
     def __init__(self, stage_filename):
+        for spr in gb_spr.all_sprites.sprites():
+            spr.kill()
+            del spr
+
         self.stage_filename = stage_filename
         self.P1 = Player()
 
@@ -30,6 +34,13 @@ class GameplayScene:
         self.restart_text = gb_setting.FONT_PRESS_SPACE.render('Press Space Bar to Restart', True, (255, 255, 255))
         self.game_over_rect = self.game_over_text.get_rect()
         self.restart_rect = self.restart_text.get_rect()
+
+        # Stage complete text
+        self.stage_complete_text = gb_setting.FONT_GAME_OVER.render('STAGE COMPLETED!', True, (255, 255, 255))
+        self.congrats_text = gb_setting.FONT_PRESS_SPACE.render('Press Space Bar to Return to Main Menu', True, (255, 255, 255))
+        self.stage_complete_rect = self.stage_complete_text.get_rect()
+        self.congrats_rect = self.congrats_text.get_rect()
+
         self.screen_fill = pygame.Surface((gb_var.SURFACE.get_width(), gb_var.SURFACE.get_height()))
         self.screen_fill.fill((0, 0, 0))
         self.screen_fill.set_alpha(128)
@@ -48,6 +59,13 @@ class GameplayScene:
         gb_var.SURFACE.fill((0, 0, 0))
         if gb_var.IS_PAUSING:
             return
+
+        if self.P1.reached_goal:
+            self.stage_complete_rect.center = (gb_var.SURFACE.get_width() // 2, gb_var.SURFACE.get_height() // 2)
+            self.congrats_rect.center = (gb_var.SURFACE.get_width() // 2, gb_var.SURFACE.get_height() // 2 + 25)
+            gb_var.SURFACE.blit(self.screen_fill, self.screen_fill_rect)
+            gb_var.SURFACE.blit(self.stage_complete_text, self.stage_complete_rect)
+            gb_var.SURFACE.blit(self.congrats_text, self.congrats_rect)
 
         self.camera.scroll()
         for entity in gb_spr.all_sprites:
