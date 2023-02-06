@@ -21,7 +21,7 @@ class Player(pygame.sprite.Sprite):
         # Rendering setup
         self.surf = pygame.Surface((30, 30))
         self.surf.fill(gb_var.STATE_COLOR['n'])
-        self.rect = self.surf.get_rect(center=(10, 420))
+        self.rect = self.surf.get_rect()
 
         # Physic setup
         self.direction = vec(0, 0)

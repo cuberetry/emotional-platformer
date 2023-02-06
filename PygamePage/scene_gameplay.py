@@ -5,6 +5,7 @@ from InstanceModel.spr_player import *
 from InstanceModel.System.spr_boundary import *
 import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.sprite_group as gb_spr
+from InstanceModel.Environment.spr_particle_emitter import *
 
 
 class GameplayScene:
@@ -19,6 +20,7 @@ class GameplayScene:
         # Load stage
         self.scene_map = TileMap(gb_setting.ROOT_PATH + "/StageData/" + self.stage_filename)
         self.P1.rect.x, self.P1.rect.y = self.scene_map.start_x, self.scene_map.start_y
+        self.particle = ParticleEmitter()
 
         self.boundary_map = BoundaryMap(gb_setting.ROOT_PATH + "/StageData/" + self.stage_filename)
         self.boundary = Boundary(self.P1, self.boundary_map)
@@ -67,6 +69,7 @@ class GameplayScene:
             gb_var.SURFACE.blit(self.stage_complete_text, self.stage_complete_rect)
             gb_var.SURFACE.blit(self.congrats_text, self.congrats_rect)
 
+        self.particle.emit()
         self.camera.scroll()
         for entity in gb_spr.all_sprites:
             if entity in gb_spr.camera_sprites:
