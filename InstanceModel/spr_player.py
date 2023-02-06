@@ -3,6 +3,7 @@ from pygame.locals import *
 import GlobalVariable.game_var as gb_var
 import GlobalVariable.sprite_group as gb_spr
 from InstanceModel.System import spr_pause_menu as pause_menu
+import PygamePage.scene_main_menu as mm
 
 vec = pygame.math.Vector2
 
@@ -12,6 +13,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.emotion_state = gb_var.EMOTION
         self.is_dead = False
+        self.reached_goal = False
         gb_spr.all_sprites.add(self)
         gb_spr.player_sprites.add(self)
         self.pause_menu = pause_menu.PauseMenu()
@@ -30,10 +32,15 @@ class Player(pygame.sprite.Sprite):
 
     # Simple movement
     def move(self):
+        pressed_keys = pygame.key.get_pressed()
+
+        if self.reached_goal:
+            if pressed_keys[K_SPACE]:
+                gb_var.CUR_SCENE = mm.MainMenuScene()
+            return
         if gb_var.IS_PAUSING:
             return
         # Input handling
-        pressed_keys = pygame.key.get_pressed()
         if pressed_keys[K_ESCAPE]:
             self.pause_menu.activate_menu()
         if self.is_dead:
@@ -112,8 +119,10 @@ class Player(pygame.sprite.Sprite):
         hit_goal = gb_spr.goal_sprites
         for entity in hit_goal.sprites():
             if entity.rect.colliderect(self.rect):
-                entity.kill()
-                self.reach_goal()
+                for e in hit_goal:
+                    e.kill()
+                self.reached_goal = True
+                self.surf.set_alpha(0)
 
     # Update instance status
     def update(self):
@@ -122,7 +131,7 @@ class Player(pygame.sprite.Sprite):
             self.pause_menu.mainloop()
             return
         # Dead
-        if self.is_dead:
+        if self.is_dead or self.reached_goal:
             return
 
         # Player emotion state update
@@ -147,8 +156,3 @@ class Player(pygame.sprite.Sprite):
         self.direction = vec(0, 0)
         self.surf.set_alpha(None)
         self.is_dead = False
-
-    @ staticmethod
-    def reach_goal():
-        print("Reached goal")
-        exit(0)
