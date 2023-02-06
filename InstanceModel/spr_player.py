@@ -119,7 +119,7 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         # Pausing
         if gb_var.IS_PAUSING:
-            self.pause_menu.render_menu()
+            self.pause_menu.mainloop()
             return
         # Dead
         if self.is_dead:
