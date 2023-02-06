@@ -18,3 +18,4 @@ PLATFORM_STATE_COLOR = {'pp': (255, 180, 180),
                         'sp': (100, 100, 255),
                         'wp': (100, 255, 100)}
 CHECKPOINT = [0, 0]
+STAGE_SELECT = None

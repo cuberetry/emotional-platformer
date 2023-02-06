@@ -7,15 +7,16 @@ import GlobalVariable.game_setting as gb_setting
 import GlobalVariable.sprite_group as gb_spr
 
 
-class Scene:
+class GameplayScene:
     def __init__(self, stage_filename):
+        self.stage_filename = stage_filename
         self.P1 = Player()
 
         # Load stage
-        self.scene_map = TileMap(gb_setting.ROOT_PATH + "/StageData/" + stage_filename + ".csv")
+        self.scene_map = TileMap(gb_setting.ROOT_PATH + "/StageData/" + self.stage_filename)
         self.P1.rect.x, self.P1.rect.y = self.scene_map.start_x, self.scene_map.start_y
 
-        self.boundary_map = BoundaryMap(gb_setting.ROOT_PATH + "/StageData/" + stage_filename + ".csv")
+        self.boundary_map = BoundaryMap(gb_setting.ROOT_PATH + "/StageData/" + self.stage_filename)
         self.boundary = Boundary(self.P1, self.boundary_map)
 
         self.camera = Camera(self.P1, self.boundary_map)
@@ -65,14 +66,8 @@ class Scene:
         pygame.display.update()
         gb_var.FPS.tick(gb_setting.MAXFPS)
 
-    def change_scene(self, new_scene):
-        for entity in gb_spr.all_sprites:
-            entity.kill()
-        gb_var.CUR_SCENE = new_scene
-        del self
-
     def restart(self):
         for entity in gb_spr.all_sprites:
             entity.kill()
-        gb_var.CUR_SCENE = Scene()
+        gb_var.CUR_SCENE = GameplayScene(self.stage_filename)
         del self
