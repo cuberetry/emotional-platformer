@@ -93,6 +93,9 @@ class Player(pygame.sprite.Sprite):
                         return
                 if entity in gb_spr.ice_sprites:
                     if self.emotion_state == 'a':
+                        gb_var.CUR_SCENE.particle.add_particles(self.rect.x - gb_var.CUR_SCENE.camera.offset.x,
+                                                                self.rect.y - gb_var.CUR_SCENE.camera.offset.y,
+                                                                10, 'Ice')
                         entity.kill()
                     else:
                         self.player_kill()
@@ -108,7 +111,6 @@ class Player(pygame.sprite.Sprite):
         # Enemy collision
         hit_enemy = gb_spr.enemy_sprites
         for entity in hit_enemy.sprites():
-
             if entity.rect.colliderect(self.rect) and not self.emotion_state == 'w':
                 self.player_kill()
                 return
@@ -154,6 +156,9 @@ class Player(pygame.sprite.Sprite):
         self.surf.set_alpha(0)
         self.is_dead = True
         self.jumped = True
+        gb_var.CUR_SCENE.particle.add_particles(self.rect.x - gb_var.CUR_SCENE.camera.offset.x,
+                                                self.rect.bottom - gb_var.CUR_SCENE.camera.offset.y,
+                                                20, 'Death')
 
     def respawn(self):
         self.rect.x, self.rect.y = gb_var.CHECKPOINT
