@@ -56,6 +56,9 @@ class Player(pygame.sprite.Sprite):
         if pressed_keys[K_SPACE] and not self.jumped and self.direction.y == 0:
             self.jumped = True
             self.direction.y = self.jump_speed
+            gb_var.CUR_SCENE.particle.add_particles(self.rect.x - gb_var.CUR_SCENE.camera.offset.x,
+                                                    self.rect.bottom - gb_var.CUR_SCENE.camera.offset.y,
+                                                    10)
 
         # Movement handling
         hit_platform = gb_spr.env_sprites
