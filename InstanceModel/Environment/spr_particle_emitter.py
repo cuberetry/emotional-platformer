@@ -17,12 +17,13 @@ class ParticleEmitter:
                 pygame.draw.circle(gb_var.SURFACE, pygame.Color('White'),
                                    p[0], int(p[1]))
 
-    def add_particles(self, x, y):
-        radius = r.randint(5, 7)
-        dir_x = r.randint(-5, 5)
-        dir_y = r.randint(0, 5)
-        particle_circle = [[x, y], radius, [dir_x, dir_y]]
-        self.particles.append(particle_circle)
+    def add_particles(self, x, y, amount=1):
+        for _ in range(amount):
+            radius = r.randint(5, 7)
+            dir_x = r.randint(-5, 5)
+            dir_y = r.randint(0, 5)
+            particle_circle = [[x, y], radius, [dir_x, dir_y]]
+            self.particles.append(particle_circle)
 
     def delete_particles(self):
         self.particles = [particle for particle in self.particles if particle[1] > 0]
