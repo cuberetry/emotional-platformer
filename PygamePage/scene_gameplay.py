@@ -1,4 +1,5 @@
 import sys
+
 from InstanceModel.System.spr_tilemap import *
 from InstanceModel.System.spr_camera import *
 from InstanceModel.spr_player import *
@@ -16,6 +17,8 @@ class GameplayScene:
 
         self.stage_filename = stage_filename
         self.P1 = Player()
+        self.fire_timer = pygame.USEREVENT + 1
+        pygame.time.set_timer(self.fire_timer, 40)
 
         # Load stage
         self.scene_map = TileMap(gb_setting.ROOT_PATH + "/StageData/" + self.stage_filename)
@@ -56,6 +59,12 @@ class GameplayScene:
         for entity in gb_spr.enemy_sprites:
             entity.update()
         for event in pygame.event.get():
+            if event.type == self.fire_timer:
+                for p in gb_spr.fire_sprites:
+                    if r.randint(0, 100) < 20:
+                        self.particle.add_particles(p.rect.x - self.camera.offset.x,
+                                                    p.rect.y - self.camera.offset.y,
+                                                    1, 'Smoke')
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
