@@ -1,3 +1,5 @@
+import random
+
 import pygame
 from pygame.locals import *
 import GlobalVariable.game_var as gb_var
@@ -87,6 +89,9 @@ class Player(pygame.sprite.Sprite):
             if entity.rect.colliderect(self.rect):
                 if entity in gb_spr.fire_sprites:
                     if self.emotion_state == 's':
+                        gb_var.CUR_SCENE.particle.add_particles(self.rect.x - gb_var.CUR_SCENE.camera.offset.x,
+                                                                self.rect.y - gb_var.CUR_SCENE.camera.offset.y,
+                                                                10, 'Fire')
                         entity.kill()
                     else:
                         self.player_kill()

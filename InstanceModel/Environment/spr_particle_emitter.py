@@ -41,8 +41,14 @@ class ParticleEmitter:
             shape = 'Circle'
         elif ptype == 'Fire':
             radius = 4
-            dir_x = -1
-            dir_y = r.randint(-5, 5)
+            dir_x = r.randint(-7, 7)
+            dir_y = r.randint(-7, 0)
+            color = 'white'
+            shape = 'Circle'
+        elif ptype == 'Smoke':
+            radius = 4
+            dir_x = r.randint(-4, 4)
+            dir_y = r.randint(-4, 0)
             shape = 'Circle'
             color = 'darkorange'
         else:
