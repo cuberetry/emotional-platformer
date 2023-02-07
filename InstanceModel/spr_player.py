@@ -111,6 +111,7 @@ class Player(pygame.sprite.Sprite):
 
             if entity.rect.colliderect(self.rect) and not self.emotion_state == 'w':
                 self.player_kill()
+                return
 
         # Checkpoint collision
         hit_checkpoint = gb_spr.checkpoint_sprites
